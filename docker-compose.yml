@@ -1,0 +1,23 @@
+version: '2'
+services:
+  api:
+    build: .
+    container_name: node-ts-api
+    ports: 
+      - 8080:8080
+    volumes: 
+      - ./:/usr/src/app
+    command: "npm run dev"
+    environment:
+      - MYSQL_DATABASE=tscrud
+      - MYSQL_HOST=mysql
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_ROOT_USERNAME=root
+      - MYSQL_PORT=3306
+  mysql:
+    image: mysql:8.0.17
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: tscrud
+    ports:
+      - 3306:3306
